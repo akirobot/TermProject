@@ -1,0 +1,63 @@
+#sidebar{
+    width: 25%;
+    float: left;
+    margin: 2% 0;
+    font-size: 0.9em;
+    color: #C4C4C4;
+}
+#sidebar td{
+    padding: 5% 5%;
+    background-color: #333333;
+}
+#sidebar a:any-link{
+    color: lightblue;
+}
+#sidebar a:hover{
+    color: lightcoral;
+}
+#mainsection{
+    width: 70%;
+    float: right;
+    margin-left: 5%;
+}
+#mainsection h3{
+    text-align: center;
+    font-family: Arvo;
+    font-weight: normal;
+    font-size: 1.5em;
+    margin: 2% 0%;
+}
+#mainsection img{
+    width: 100%;
+    margin: 0% auto;
+    margin-bottom: 2%;
+}
+#mainsection ul{
+    list-style-position: inside;
+}
+@media only screen and (min-width: 770px){
+    #homepage{
+        width: 90%;
+        margin: 0% auto;
+    }
+    #mainsection{
+        width: 70%;
+        margin-left: 5%;
+    }
+    #mainsection h3{
+        font-size: 2em;
+    }
+}
+@media only screen and (min-width: 990px){
+    #sidebar{
+        width: 20%;
+    }
+}
+@media only screen and (min-width: 1200px){
+    #homepage{
+        width: 70%;
+    }
+    #sidebar{
+        width: 25%;
+    }
+}

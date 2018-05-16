@@ -1,0 +1,58 @@
+.calendar {
+	width: 100%;
+	margin: auto;
+	padding: 50px;
+	background-color: azure;
+}
+
+.calendar-title {
+  background-color: azure;
+}
+
+#schedule {
+	background-color: azure;
+	padding: 50px;
+  display: block;
+}
+
+.month-schedule {
+	background-color: azure;
+	padding: 40px;
+  font-size: 1.4em;
+}
+
+.calendar td, .calendar th {
+	border: solid 1pt black;
+	
+}
+
+.calendar th {
+	height: 40px;
+	width: 100px;
+	
+}
+
+.calendar td {
+	height: 80px;
+}
+
+#sidebar {
+	float: left;
+	width: 30%;
+	height: 915px;
+	background-color: rgb(130, 177, 255);
+}
+
+#sidebar-text {
+	font-size: 2em;
+	padding: 50px 0 0 80px;
+}
+
+.toggleable {
+	display: none;
+}
+
+#main-body {
+	float: right;
+	width: 70%;
+}
