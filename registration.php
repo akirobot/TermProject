@@ -223,14 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$validated = False;
 	}
 
-	
-	if(empty($_POST["medication_allergy"])){
-		$error_medication_allergy = "Required";
-		$validated = False;
-	}
-	else {
-		$medication_allergy = test_input($_POST["medication_allergy"]);
-	}
+	$medication_allergy = test_input($_POST["medication_allergy"]);
 
 	$medication_allergy_list = test_input($_POST["medication_allergy_list"]);
 	if (!preg_match("/^[a-zA-Z0-9 ]*$/", $medication_allergy_list)) {
@@ -238,13 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$validated = False;
 	}
 
-	if(empty($_POST["food_allergy"])){
-		$error_food_allergy = "Required";
-		$validated = False;
-	}
-	else {
-		$food_allergy = test_input($_POST["food_allergy"]);
-	}
+	$food_allergy = test_input($_POST["food_allergy"]);
 
 	$food_allergy_list = test_input($_POST["food_allergy_list"]);
 	if (!preg_match("/^[a-zA-Z0-9 ]*$/", $food_allergy_list)) {
@@ -292,6 +279,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$food_allergy_list = $_POST["food_allergy_list"];
 
 	$model_release = $_POST["model_release"];
+	
+	if($validated == "True")
+	{
+		header("Location: homepage.html");
+	}
 }
 
 function test_input($data) {
@@ -329,7 +321,7 @@ function test_input($data) {
 				<label for="first_name">First Name</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="first_name" id="first_name" value="<?php echo $first_name; ?>" required="true"/>
+			<input class="form_field field_required" type="text" name="first_name" id="first_name" value="<?php echo $first_name; ?>" required="true"/>
 			<span class="form_error"><?php echo $error_first_name; ?> </span>
 		</div>
 		<div class="form_row">
@@ -337,7 +329,7 @@ function test_input($data) {
 				<label for="last_name">Last Name</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="last_name" id="last_name" value="<?php echo $last_name; ?>" required="true"/>
+			<input class="form_field field_required" type="text" name="last_name" id="last_name" value="<?php echo $last_name; ?>" required="true"/>
 			<span class="form_error"><?php echo $error_last_name; ?> </span>
 		</div>
 		<div class="form_row">
@@ -352,15 +344,16 @@ function test_input($data) {
 				<label for="birthdate">Date of Birth</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field" type="date" name="birthdate" id="birthdate" value="<?php echo $birthdate; ?>"/>
+			<input class="form_field field_required" type="date" name="birthdate" id="birthdate" value="<?php echo $birthdate; ?>"/>
 			<span class="form_error"><?php echo $error_birthdate; ?> </span>
 		</div>
 		<div class="form_row">
 			<div class="form_label">
 				<label for="gender">Gender: </label>
+				<span style="color:red;">*</span>
 			</div>
 			<div class="form_field">
-        			<input type="radio" name="gender" value="female" required="true">Female
+        			<input type="radio" name="gender" value="female">Female
 				<input type="radio" name="gender" value="male">Male
 			</div>
 			<span class="form_error"><?php echo $error_gender; ?> </span>
@@ -370,7 +363,7 @@ function test_input($data) {
 				<label for="home_address">Home address</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field" type="text" name="home_address" id="home_address" value="<?php echo $home_address; ?>"/>
+			<input class="form_field field_required" type="text" name="home_address" id="home_address" value="<?php echo $home_address; ?>"/>
 			<span class="form_error"><?php echo $error_home_address; ?> </span>
 		</div>
 		<div class="form_row">
@@ -378,7 +371,7 @@ function test_input($data) {
 				<label for="city">City</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="city" id="city" value="<?php echo $city; ?>"/>
+			<input class="form_field field_required" type="text" name="city" id="city" value="<?php echo $city; ?>"/>
 			<span class="form_error"><?php echo $error_city; ?> </span>
 		</div>
 		<div class="form_row">
@@ -386,7 +379,7 @@ function test_input($data) {
 				<label for="zipcode">Zipcode</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>"/>
+			<input class="form_field field_required" type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>"/>
 			<span class="form_error"><?php echo $error_zipcode; ?> </span>
 		</div>
 		<div class="form_row">
@@ -394,7 +387,7 @@ function test_input($data) {
 				<label for="email">Email Address</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field" type="email" name="email" id="email" value="<?php echo $email; ?>"/>
+			<input class="form_field field_required" type="email" name="email" id="email" value="<?php echo $email; ?>"/>
 			<span class="form_error"><?php echo $error_email; ?> </span>
 		</div>
 		<div class="form_row">
@@ -402,20 +395,8 @@ function test_input($data) {
 				<label for="primary_phone">Phone Number</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="primary_phone" id="primary_phone" value="<?php echo $primary_phone; ?>"/>
+			<input class="form_field field_required" type="text" name="primary_phone" id="primary_phone" value="<?php echo $primary_phone; ?>"/>
 			<span class="form_error"><?php echo $error_primary_phone; ?> </span>
-		</div>
-		<div class="form_row">
-			<div class="form_label">
-				<label for="secondary_phone">Secondary Phone Number</label>
-			</div>
-			<input class="form_field" type="text" name="secondary_phone" id="secondary_phone" required="true"/>
-		</div>
-		<div class="form_row">
-			<div class="form_label">
-				<label for="text_phone">Phone number that we can send text</label>
-			</div>
-			<input class="form_field" type="text" name="text_phone" id="text_phone" required="true"/>
 		</div>
 	</fieldset>
 	<fieldset class="form_panel">
@@ -425,7 +406,7 @@ function test_input($data) {
 				<label for="contact_first_name">First Name</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="contact_first_name" id="contact_first_name" value="<?php echo $contact_first_name; ?>" required="true"/>
+			<input class="form_field field_required" type="text" name="contact_first_name" id="contact_first_name" value="<?php echo $contact_first_name; ?>" required="true"/>
 			<span class="form_error"><?php echo $error_contact_first_name; ?> </span>
 		</div>
 		<div class="form_row">
@@ -433,13 +414,13 @@ function test_input($data) {
 				<label for="contact_last_name">Last Name</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="contact_last_name" id="contact_last_name" value="<?php echo $contact_last_name; ?>" required="true"/>
+			<input class="form_field field_required" type="text" name="contact_last_name" id="contact_last_name" value="<?php echo $contact_last_name; ?>" required="true"/>
 			<span class="form_error"><?php echo $error_contact_last_name; ?> </span>
 		</div>
 		<div class="form_row">
 			<div class="form_label">
 				<label for="contact_middle_name">Middle Name</label>
-            </div>
+            		</div>
 			<input class="form_field" type="text" name="contact_middle_name" id="contact_middle_name" value="<?php echo $contact_middle_name; ?>"/>
 			<span class="form_error"><?php echo $error_contact_middle_name; ?> </span>
 		</div>
@@ -448,18 +429,16 @@ function test_input($data) {
 				<label for="contact_phone">Phone Number</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field_required" type="text" name="contact_phone" id="contact_phone" value="<?php echo $contact_phone; ?>"/>
+			<input class="form_field field_required" type="text" name="contact_phone" id="contact_phone" required="true" value="<?php echo $contact_phone; ?>"/>
 			<span class="form_error"><?php echo $error_contact_phone; ?> </span>
-			<input class="form_field_required" type="text" name="contact_phone" id="primary_phone" required="true"/>
 		</div>
 		<div class="form_row">
 			<div class="form_label">
 				<label for="contact_relation">Relation to Student</label>
 				<span style="color:red;">*</span>
 			</div>
-			<input class="form_field" type="text" name="contact_relation" id="contact_relation" value="<?php echo $contact_relation; ?>"/>
+			<input class="form_field field_required" type="text" name="contact_relation" id="contact_relation" required="true" value="<?php echo $contact_relation; ?>"/>
 			<span class="form_error"><?php echo $error_contact_relation; ?> </span>
-			<input class="form_field" type="text" name="contact_relation" id="contact_relation" required="true"/>
 		</div>
 	</fieldset>
 	
@@ -471,7 +450,6 @@ function test_input($data) {
 			</div>
 			<input class="form_field" type="text" name="general_school_name" id="general_school_name" value="<?php echo $general_school_name; ?>"/>
 			<span class="form_error"><?php echo $error_general_school_name; ?> </span>
-			<input class="form_field" type="text" name="general_school_name" id="general_school_name"/>
 		</div>
 		<div class="form_row">
 			<div class="form_label">
@@ -479,11 +457,8 @@ function test_input($data) {
 				<span style="color:red;">*</span>
 			</div>
 			<div class="form_field">
-				<input type="radio" name="education" value="yes" checked="true" onclick="alertExperienceCheck()">Yes
+				<input type="radio" name="education" value="yes" onclick="alertExperienceCheck()">Yes
 				<input type="radio" name="education" value="no" onclick="alertExperienceCheck()">No
-			<div class="form_field">
-				<input type="radio" name="education" value="yes" required="true">Yes
-				<input type="radio" name="education" value="no">No
 			</div>
 			<span class="form_error"><?php echo $error_education; ?> </span>
 		</div>
@@ -507,24 +482,6 @@ function test_input($data) {
 			</div>
 			<input class="form_field" type="text" name="education_time" id="education_time"/>
 			<span class="form_error"><?php echo $error_education_time; ?> </span>
-		<div class="form_row">
-			<div class="form_label">
-				<label for="education_duration">How long?</label>
-			</div>
-			<input class="form_field" type="text" name="education_duration" id="education_duration"/>
-			
-		</div>
-		<div class="form_row">
-			<div class="form_label">
-				<label for="japanese_school_name">Name of School</label>
-			</div>
-			<input class="form_field" type="text" name="japanese_school_name" id="japanese_school_name"/>
-		</div>
-		<div class="form_row">
-			<div class="form_label">
-				<label for="education_time">When?</label>
-			</div>
-			<input class="form_field" type="text" name="education_time" id="education_time"/>
 		</div>
 		<div class="form_row">
 			<div class="form_label">
@@ -532,7 +489,6 @@ function test_input($data) {
 			</div>
 			<input class="form_field" type="text" name="reference" id="reference" value="<?php echo $reference; ?>"/>
 			<span class="form_error"><?php echo $error_reference; ?> </span>
-			<input class="form_field" type="text" name="reference" id="reference"/>
 		</div>
 		<div class="form_row">
 			<div class="form_label">
@@ -547,15 +503,7 @@ function test_input($data) {
 		<legend class="form_heading">Emergency Treatment Consent (for students under 18)</legend>
 		<div class="form_minor_check">
 			<input type="checkbox" id="minor_registration" name="minor_registration" value="minor_registration" onchange="alertMinorCheck(this)">
-			<input class="form_field" type="text" name="objective" id="objective"/>
-		</div>
-	</fieldset>
-		
-	<fieldset class="form_panel">
-		<legend class="form_heading">Emergency Treatment Consent (for students under 18)</legend>
-		<div class="form minor_check">
-			<input type="checkbox" id="minor_registration" name="minor_registration" value="minor_registration">
-			<label for="minor_registration"> The person registering is a minor </label> 
+			<label for="minor_registration"> The person registering is a minor </label>
 		</div>
 		<p class="consent_statement minor_only">
 			<br>
@@ -568,15 +516,10 @@ function test_input($data) {
 		<br>
 		<div class="form_row minor_only" disabled="true">
 			<div class="form_label">
-		<div class="form_row">
-			<div class="form_label">
 				<label for="medication_allergy">Does your child have any medication allergies?</label>
-				<span style="color:red;">*</span>
 			</div>
 			<div class="form_field">
-				<input type="radio" name="medication_allergy" value="yes" >Yes
-			<div class="form_field">
-				<input type="radio" name="medication_allergy" value="yes" required="true">Yes
+				<input type="radio" name="medication_allergy" value="yes">Yes
 				<input type="radio" name="medication_allergy" value="no">No
 			</div>
 			<span class="form_error"><?php echo $error_medication_allergy; ?> </span>
@@ -590,23 +533,11 @@ function test_input($data) {
 		</div>
 		<div class="form_row minor_only">
 			<div class="form_label">
-		<div class="form_row">
-			<div class="form_label">
-				<label for="medication_allergy_list">List medication allergies (if any)</label>
-			</div>
-			<input class="form_field" type="text" name="medication_allergy_list" id="medication_allergy_list"/>
-		</div>
-		<div class="form_row">
-			<div class="form_label">
 				<label for="food_allergy">Does your child have any food allergies?</label>
-				<span style="color:red;">*</span>
 			</div>
 			<div class="form_field">
 				<input type="radio" name="food_allergy" value="yes">Yes
 				<input type="radio" name="food_allergy" value="no">No
-			<div class="form_field">
-				<input type="radio" name="food_allergy" value="yes" required="true">Yes
-				<input type="radio" name="fod_allergyallergy" value="no">No
 			</div>
 			<span class="form_error"><?php echo $error_food_allergy; ?> </span>
 		</div>
@@ -616,11 +547,6 @@ function test_input($data) {
 			</div>
 			<input class="form_field" type="text" name="food_allergy_list" id="food_allergy_list"/>
 			<span class="form_error"><?php echo $error_food_allergy_list; ?> </span>
-		<div class="form_row">
-			<div class="form_label">
-				<label for="food_allergy_list">List food allergies (if any)</label>
-			</div>
-			<input class="form_field" type="text" name="food_allergy_list" id="food_allergy_list"/>
 		</div>
 	</fieldset>
 	<div class="form model_release_check">
